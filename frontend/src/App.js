@@ -404,9 +404,15 @@ const AttendanceApp = () => {
                 <div className="p-4 bg-gray-50 rounded">
                   <p className="font-medium">System Status:</p>
                   <p className={`text-sm ${isModelLoaded ? 'text-green-600' : 'text-yellow-600'}`}>
-                    {isModelLoaded ? '✓ Face detection ready' : 'Loading face detection models...'}
+                    {isModelLoaded ? '✓ Face detection ready' : '⏳ Loading face detection models...'}
                   </p>
                   <p className="text-sm text-gray-600">Registered persons: {persons.length}</p>
+                  {recognitionResult.includes('Failed to load') && (
+                    <p className="text-xs text-red-600 mt-1">
+                      Note: Face recognition requires model files to be loaded. 
+                      This may not work in all environments.
+                    </p>
+                  )}
                 </div>
                 
                 <button

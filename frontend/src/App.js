@@ -21,18 +21,34 @@ const AttendanceApp = () => {
   // Initialize Face-API models
   useEffect(() => {
     const loadModels = async () => {
-      const MODEL_URL = '/models';
+      const MODEL_URL = process.env.PUBLIC_URL + '/models';
       try {
+        console.log('Loading face-api models from:', MODEL_URL);
         await Promise.all([
           faceapi.nets.tinyFaceDetector.loadFromUri(MODEL_URL),
           faceapi.nets.faceLandmark68Net.loadFromUri(MODEL_URL),
           faceapi.nets.faceRecognitionNet.loadFromUri(MODEL_URL),
           faceapi.nets.faceExpressionNet.loadFromUri(MODEL_URL)
         ]);
-        console.log('Face-API models loaded');
+        console.log('Face-API models loaded successfully');
         setIsModelLoaded(true);
       } catch (error) {
         console.error('Error loading face-api models:', error);
+        // Try alternative loading approach
+        try {
+          console.log('Trying alternative model loading approach...');
+          await Promise.all([
+            faceapi.nets.tinyFaceDetector.loadFromUri('/models'),
+            faceapi.nets.faceLandmark68Net.loadFromUri('/models'),
+            faceapi.nets.faceRecognitionNet.loadFromUri('/models'),
+            faceapi.nets.faceExpressionNet.loadFromUri('/models')
+          ]);
+          console.log('Face-API models loaded with alternative approach');
+          setIsModelLoaded(true);
+        } catch (altError) {
+          console.error('Alternative loading also failed:', altError);
+          setRecognitionResult('Failed to load face recognition models. Please refresh the page.');
+        }
       }
     };
     loadModels();

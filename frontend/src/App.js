@@ -549,6 +549,13 @@ const AttendanceApp = () => {
                       <h3 className="font-semibold">{person.name}</h3>
                       <p className="text-sm text-gray-600">ID: {person.employee_id}</p>
                       <p className="text-xs text-gray-500 capitalize">{person.role}</p>
+                      <button
+                        onClick={() => testAttendanceForPerson(person)}
+                        disabled={isRecognizing}
+                        className="mt-2 bg-blue-500 text-white px-3 py-1 rounded text-xs hover:bg-blue-600 disabled:bg-gray-400"
+                      >
+                        {isRecognizing ? 'Processing...' : 'Test Attendance'}
+                      </button>
                     </div>
                   </div>
                 </div>

@@ -104,6 +104,8 @@ async def get_person(person_id: str):
         if not person:
             raise HTTPException(status_code=404, detail="Person not found")
         return Person(**person)
+    except HTTPException:
+        raise
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Error fetching person: {str(e)}")
 

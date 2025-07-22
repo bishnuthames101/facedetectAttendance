@@ -121,6 +121,8 @@ async def delete_person(person_id: str):
         await db.attendance.delete_many({"person_id": person_id})
         
         return {"message": "Person and their attendance records deleted successfully"}
+    except HTTPException:
+        raise
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Error deleting person: {str(e)}")
 

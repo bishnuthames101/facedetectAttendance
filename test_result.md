@@ -195,9 +195,9 @@ metadata:
 
 test_plan:
   current_focus:
-    - "Person Management API"
-    - "Attendance Management API"
-    - "Database Integration"
+    - "Face Recognition Integration"
+    - "Attendance UI"
+    - "Person Registration UI"
   stuck_tasks: []
   test_all: false
   test_priority: "high_first"

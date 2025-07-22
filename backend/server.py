@@ -82,6 +82,8 @@ async def create_person(person_data: PersonCreate):
         
         await db.persons.insert_one(person_obj.dict())
         return person_obj
+    except HTTPException:
+        raise
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Error creating person: {str(e)}")
 
